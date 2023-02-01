@@ -14,5 +14,12 @@ r = requests.get('https://k4clzaf58d.execute-api.us-east-1.amazonaws.com/default
 # print(r.status_code)
 data = r.json()
 df = pd.DataFrame.from_records(data['data'])
-# print(df.head())
+# print(df.head(1))
 # print(df.columns)
+
+df_csv = pd.read_csv('./data/vendor_x_data.csv')
+# print(df_csv.head())
+# print(df_csv.columns)
+df_csv.columns = map(str.lower, df_csv.columns)
+df.columns = df_csv.columns
+
