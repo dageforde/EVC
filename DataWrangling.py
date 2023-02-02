@@ -30,7 +30,14 @@ With more time, I would do some more exploratory data analysis to find individua
 '''Write data to csv'''
 joined_df.to_csv('./data/all_vendors.csv', index=False)
 
-'''Write data to sql'''
+'''Write data to sql
+Note: The the DB is not accepting this schema.'''
 from sqlalchemy import create_engine
-engine = create_engine("postgresql+psycopg2://cdag527_gmail_com:8274@68.183.51.176:5432/sqlpad")
+username = sysargv[0]
+host = sysargv[1]
+password = sysargv[2]
+database = sysargv[3]
+port = sysargv[4]
+
+engine = create_engine("postgresql+psycopg2://"+username+":"+password+"@"+host+':'+port+'/'+database)
 joined_df.to_sql('all_vendors', con=engine, schema="s_69cd1f4046f393adf2a7697f8ae5a8f9", if_exists='append', index=False)
