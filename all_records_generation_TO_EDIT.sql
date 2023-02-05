@@ -1,5 +1,5 @@
-drop table if exists {{ YOUR_SCHEMA_HERE }}.all_records;
-create table {{ YOUR_SCHEMA_HERE }}.all_records as (
+drop table if exists s_69cd1f4046f393adf2a7697f8ae5a8f9.all_records;
+create table s_69cd1f4046f393adf2a7697f8ae5a8f9.all_records as (
     select
         application_id
         , org_id
