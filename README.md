@@ -4,13 +4,14 @@
 This is a script for pulling data from Vendor Y's API and merging it with a csv containing Vendor X's data. The code cleans & forces consistency across the joined data and writes to a csv in the `Data` folder.
 
 ### Executing Python code
+#### Note: In the program's current state, the new schema is not able to be created. 
 At the command line, navigate to project directory and enter the following command with DB credentials as arguments in the order specified below: 
-`python DataWrangling.py "DB USERNAME" "DB HOST" "DB PASSWORD" "DB NAME" "DB PORT"`
+`python DataWrangling.py "<DB USERNAME>" "<DB HOST>" "<DB PASSWORD>" "<DB NAME>" "<DB PORT>"`
 
 ### Next Steps
-1. Revise code to be more flexible, secure and overall more pythonic by wrapping code blocks in functions
-2. Fill out data cleansing functions
-3. Fix database schema errors
+1. Fix database schema errors
+2. Revise code to be more flexible, secure and overall more pythonic by wrapping code blocks in functions
+3. Fill out data cleansing functions
 
 ## Data Engineer Concepts
 1. Before ingesting data into a preexisting reporting structure, my ultimate concern is around maintaining data quality. I would ask whether data from different sources are structured differently. Is there missing data? Is it valuable to me to leave this as missing data, or do I want to come up with a strategy for imputing values in a way that doesn't affect the data's accuracy or usefulness?
