@@ -22,7 +22,7 @@ df.columns = df_csv.columns
 frames = [df,df_csv]
 joined_df = pd.concat(frames, ignore_index=True)
 
-'''Given more time, this is where I would write a function to clean the joined dataframe.
+'''This is where I would write a function to clean the joined dataframe.
 This function would look at missing data and based on the volume of missing values, would follow conditions for filling or imputing the missing values.
 With more time, I would do some more exploratory data analysis to find individual columns with data cleaning issues and take measures to enforce consistency across the dataframe.
 '''
@@ -30,22 +30,22 @@ With more time, I would do some more exploratory data analysis to find individua
 '''Write data to csv'''
 joined_df.to_csv('./data/all_vendors.csv', index=False)
 
-'''Write data to sql
+'''Create DB connection. Create schema. Create table. Load dataframe to table.
 Note: The the DB is not accepting this schema.'''
 from sqlalchemy import create_engine
 import psycopg2
 import sys
-# username = sys.argv[0]
-# host = sys.argv[1]
-# password = sys.argv[2]
-# database = sys.argv[3]
-# port = sys.argv[4]
+username = sys.argv[0]
+host = sys.argv[1]
+password = sys.argv[2]
+database = sys.argv[3]
+port = sys.argv[4]
 
 conn = psycopg2.connect(dbname='sqlpad',
                         user='cdag527_gmail_com', password='8274',
                         host='68.183.51.176')
 cur = conn.cursor()
-
+create_schema_query = """CREATE SCHEMA IF NOT EXISTS s_69cd1f4046f393adf2a7697f8ae5a8f9 AUTHORIZATION cdag527_gmail_com;"""
 create_table_query = """
                      CREATE TABLE IF NOT EXISTS s_69cd1f4046f393adf2a7697f8ae5a8f9.all_vendors (vendor_id varchar(1024),
                                                                                                 status varchar(1024),
@@ -100,8 +100,9 @@ create_table_query = """
                                                                                                 program_state varchar(1024),
                                                                                                 partner_id int,
                                                                                                 field_start timestamp,
-                                                                                                field_end timestamp);;"""
-cur.execute(create_table_query)
+                                                                                                field_end timestamp);;
+                                                                                                """
+cur.execute(create_schema_query, create_table_query)
 
 engine = create_engine("postgresql+psycopg2://"+username+":"+password+"@"+host+':'+port+'/'+database)
 joined_df.to_sql('all_vendors', con=engine, schema="s_69cd1f4046f393adf2a7697f8ae5a8f9", if_exists='append', index=False)
