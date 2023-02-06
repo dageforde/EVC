@@ -1,7 +1,7 @@
 drop table if exists s_69cd1f4046f393adf2a7697f8ae5a8f9.all_records;
 create table s_69cd1f4046f393adf2a7697f8ae5a8f9.all_records as (
     select
-        application_id
+        vendor_id
         , org_id
         , shift_id
         , first_name
@@ -41,6 +41,7 @@ create table s_69cd1f4046f393adf2a7697f8ae5a8f9.all_records as (
         , field_end
         , evc_month
         , evc_year
-    from public.qc_vendor_data
+    from public.vendor_x_registrations_deduped
+
 )
 ;
